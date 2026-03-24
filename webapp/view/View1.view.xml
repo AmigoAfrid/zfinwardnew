@@ -262,7 +262,7 @@
                     <t:Column tooltip="Qty Received" width="10rem">
                         <Label text="Qty Received" />
                         <t:template>
-                            <Input value="{=${TabModel>qtyrecd}?${TabModel>qtyrecd}:'0.000'}" />
+                            <Input value="{TabModel>qtyrecd}" type="Number"/>
                         </t:template>
                     </t:Column>
 

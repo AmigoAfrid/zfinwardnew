@@ -1679,11 +1679,19 @@ sap.ui.define([
 
             var oHeaderModel = this.getView().getModel("HeaderModel");
             var oGate = oHeaderModel.getProperty("/HeaderData/gateentryno");
+            var oRDC = oHeaderModel.getProperty("/HeaderData/rdcno");
+
 
             let aFilter = [];
             if (oGate) {
                 aFilter.push(
                     new sap.ui.model.Filter("gateentryno", sap.ui.model.FilterOperator.EQ, oGate)
+                );
+            }
+
+            if (oRDC) {
+                aFilter.push(
+                    new sap.ui.model.Filter("rdcno", sap.ui.model.FilterOperator.EQ, oRDC)
                 );
             }
 

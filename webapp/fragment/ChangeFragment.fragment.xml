@@ -163,7 +163,9 @@
                 <t:Column tooltip="Qty Received" width="10rem">
                     <Label text="Qty Received" />
                     <t:template>
-                        <Input value="{=${FragModel>qtyrecd}?${FragModel>qtyrecd}:'0.000'}" />
+                        <!-- <Input value="{=${FragModel>qtyrecd}?${FragModel>qtyrecd}:'0.000'}" /> -->
+                        <Input value="{FragModel>qtyrecd}" type="Number" />
+
                     </t:template>
                 </t:Column>
 
