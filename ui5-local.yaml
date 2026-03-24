@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "4.0"
+metadata:
+  name: zfinwardnew
+type: application
+framework:
+  name: SAPUI5
+  version: 1.145.0
+  libraries:
+    - name: sap.m
+    - name: sap.ui.core
+    - name: sap.ushell
+    - name: themelib_sap_horizon
+server:
+  customMiddleware:
+    - name: fiori-tools-appreload
+      afterMiddleware: compression
+      configuration:
+        port: 35729
+        path: webapp
+        delay: 300
+    - name: fiori-tools-preview
+      afterMiddleware: fiori-tools-appreload
+      configuration:
+        flp:
+          theme: sap_horizon
+    - name: fiori-tools-proxy
+      afterMiddleware: compression
+      configuration:
+        ignoreCertErrors: false
+        backend:
+          - url: https://my413500.s4hana.cloud.sap
+            destination: my413500_Cust
+            path: /sap
+          - url: https://my413500.s4hana.cloud.sap
+            destination: my413500_Cust
+            path: /sap/opu/odata/sap/ZNRDC_SB/
+          - url: https://my413500.s4hana.cloud.sap
+            destination: my413500_Cust
+            path: /sap/opu/odata/sap/ZCDSGATE_ENTRY_SRVB/
+    - name: sap-fe-mockserver
+      beforeMiddleware: csp
+      configuration:
+        mountPath: /
+        services:
+          - urlPath: /sap/opu/odata/sap/ZNRDC_SB
+            metadataPath: ./webapp/localService/mainService/metadata.xml
+            mockdataPath: ./webapp/localService/mainService/data
+            generateMockData: true
+          - urlPath: /sap/opu/odata/sap/ZCDSGATE_ENTRY_SRVB
+            metadataPath: ./webapp/localService/ZCDSGATE_ENTRY_SRVB/metadata.xml
+            mockdataPath: ./webapp/localService/ZCDSGATE_ENTRY_SRVB/data
+            generateMockData: true
+        annotations: []

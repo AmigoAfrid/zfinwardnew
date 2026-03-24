@@ -1,0 +1,21 @@
+<core:FragmentDefinition xmlns="sap.ui.comp.valuehelpdialog" xmlns:m="sap.m" xmlns:fb="sap.ui.comp.filterbar" xmlns:core="sap.ui.core">
+	<ValueHelpDialog supportMultiselect="false"  title="Customer Code" ok=".onValueHelpOkPress_Customer" cancel=".onValueHelpCancelPress_Customer" afterClose=".onValueHelpAfterClose_Customer" supportRanges="false" key="CUSTCODE" descriptionKey="">
+		<filterBar>
+			<fb:FilterBar  advancedMode="true" search=".onFilterBarSearch_Customer" isRunningInValueHelpDialog="true">
+				<fb:filterGroupItems>
+					<fb:FilterGroupItem groupName="__$INTERNAL$" name="CUSTCODE" label="Customer Code" visibleInFilterBar="true">
+						<fb:control>
+								<m:Input name="CUSTCODE" showSuggestion="true" showValueHelp="false" suggestionItems="{ path: 'ZNRDC_SB>/Z_I_Customer', sorter: { path: 'CUSTCODE' }}">
+								<core:Item key="{ZNRDC_SB>CUSTCODE}" text="{ZNRDC_SB>CUSTCODE}" />
+								<core:Item key="{ZNRDC_SB>ORGANIZATION}" text="{ZNRDC_SB>ORGANIZATION}" />
+							</m:Input>
+						</fb:control>
+					</fb:FilterGroupItem>
+				
+
+				</fb:filterGroupItems>
+			</fb:FilterBar>
+		</filterBar>
+		
+	</ValueHelpDialog>
+</core:FragmentDefinition> 

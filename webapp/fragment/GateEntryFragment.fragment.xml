@@ -1,0 +1,20 @@
+<core1:FragmentDefinition xmlns="sap.ui.comp.valuehelpdialog" xmlns:m="sap.m" xmlns:fb="sap.ui.comp.filterbar" xmlns:core1="sap.ui.core">
+	<ValueHelpDialog contentWidth="50%" supportMultiselect="false"  title="Gate Entry No" ok=".onValueHelpOkPress_Gate" cancel=".onValueHelpCancelPress_Gate" afterClose=".onValueHelpAfterClose_Gate" supportRanges="false" key="gateentryno" descriptionKey="">
+		<filterBar>
+			<fb:FilterBar  advancedMode="true" search=".onFilterBarSearch_Gate" isRunningInValueHelpDialog="true">
+				<fb:filterGroupItems>
+					<fb:FilterGroupItem groupName="__$INTERNAL$" name="Currency" label="Gate Entry No" visibleInFilterBar="true">
+						<fb:control>
+								<m:Input name="gateentryno" showSuggestion="true" showValueHelp="false" suggestionItems="{ path: 'ZCDSGATE_ENTRY_SRVB>/ZCDSGATE_ENTRY_HDR', sorter: { path: 'gateentryno' }}">
+								<core1:Item key="{ZCDSGATE_ENTRY_SRVB>gateentryno}" text="{ZCDSGATE_ENTRY_SRVB>gateentryno}" />
+							</m:Input>
+						</fb:control>
+					</fb:FilterGroupItem>
+				
+
+				</fb:filterGroupItems>
+			</fb:FilterBar>
+		</filterBar>
+		
+	</ValueHelpDialog>
+</core1:FragmentDefinition> 

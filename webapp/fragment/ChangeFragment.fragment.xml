@@ -1,0 +1,245 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:t="sap.ui.table" >
+	<Dialog id="Edit_Frag_Id" showHeader="true" verticalScrolling="false" contentHeight="100%" 
+            contentWidth="100%"  title="Update Gate Entry info">
+
+
+        <Input width="10rem" showValueHelp="true" valueHelpRequest="onGateValueHelpPress" class="sapUiTinyMargin"
+           id="gateEntryNoId" />
+
+        <t:Table  rows="{FragModel>/FragData}"
+                    selectionMode="MultiToggle"
+                    enableSelectAll="false"
+                    id = "zInward_tableId1" 
+                    rowMode="Auto"             
+                    fixedColumnCount="3">
+
+            <t:columns>
+            
+                <t:Column tooltip="Gate Entry No" width="9rem">
+                    <Label text="Gate Entry No" />
+                    <t:template>
+                        <Input value="{FragModel>gateentryno}" maxLength="10" editable="false" />
+                    </t:template>
+                </t:Column> 
+
+                <t:Column tooltip="Line item" width="8rem">
+                    <Label text="Line item" />
+                    <t:template>
+                        <Input value="{FragModel>line_item}" editable="false"  />
+                    </t:template>
+                </t:Column>
+
+                 <t:Column tooltip="RDC No" width="8rem">
+                    <Label text="RDC No" />
+                    <t:template>
+                        <Input value="{FragModel>rdcno}" editable="false"  />
+                    </t:template>
+                </t:Column>
+
+                <t:Column tooltip="Customer Code" width="8rem" visible="false"  >
+                    <Label text="Customer Code" />
+                    <t:template>
+                        <Input value="{FragModel>custcode}"   />
+                    </t:template>
+                </t:Column>
+
+                <t:Column tooltip="Sales Order No" width="8rem">
+                    <Label text="Sales Order No" />
+                    <t:template>
+                        <Input value="{FragModel>salesorderno}" maxLength="10"  />
+                    </t:template>
+                </t:Column>
+
+                <t:Column tooltip="unbwmat Code" width="8rem">
+                    <Label text="UNBW Mat Code" />
+                    <t:template>
+                        <Input value="{FragModel>unbwmatcode}" showValueHelp="true" valueHelpRequest="onMaterialValueHelpPress" />
+                    </t:template>
+                </t:Column>
+
+                <t:Column tooltip="Mat Desription" width="8rem">
+                    <Label text="Mat Description" tooltip="Mat Description" />
+                    <t:template>
+                        <Input value="{FragModel>matdes}" maxLength="50" />
+                    </t:template>
+                </t:Column>
+
+                <t:Column tooltip="rdcewval" width="8rem">
+                    <Label text="RDC EW Val" />
+                    <t:template>
+                        <Input value="{FragModel>rdcewval}" />
+                    </t:template>
+                </t:Column>
+
+                <t:Column tooltip="Currency" width="7rem">
+                    <Label text="Currency" />
+                    <t:template>
+                        <Input value="{FragModel>currency}" showValueHelp="true" valueHelpRequest="onCurrencyValueHelpPress" />
+                    </t:template>
+                </t:Column>
+
+                <t:Column tooltip="CGST " width="4rem">
+                    <Label text="CGST " />
+                    <t:template>
+                        <Select selectedKey="{FragModel>cgst}">
+                            <core:Item key="0" text="0" />
+                            <core:Item key="9" text="9" />
+                        </Select>
+                    </t:template>
+                </t:Column>
+
+                <t:Column tooltip="SGST " width="4rem">
+                    <Label text="SGST" />
+                    <t:template>
+                        <Select selectedKey="{FragModel>sgst}">
+                                <core:Item key="0" text="0" />
+                                <core:Item key="9" text="9" />
+                        </Select>                            
+                    </t:template>
+                </t:Column>
+
+                <t:Column tooltip="IGST " width="4rem">
+                    <Label text="IGST " />
+                    <t:template>
+                        <Select selectedKey="{FragModel>igst}">
+                                <core:Item key="0" text="0" />
+                                <core:Item key="18" text="18" />
+                        </Select>  
+                    </t:template>
+                </t:Column>
+            
+
+                <t:Column tooltip="Equipment Id" width="6rem">
+                    <Label text="Equipment Id" />
+                    <t:template>
+                        <Input value="{FragModel>equipmentid}" maxLength="18" />
+                    </t:template>
+                </t:Column>
+
+                <t:Column tooltip="SN Equip" width="8rem">
+                    <Label text="SN Equip" />
+                    <t:template>
+                        <Input value="{FragModel>snequip}" maxLength="18"/>
+                    </t:template>
+                </t:Column>
+
+                <t:Column tooltip="pleq Code" width="4rem">
+                    <Label text="pleq Code" />
+                    <t:template>
+                        <Input value="{FragModel>pleqcode}" maxLength="10" />
+                    </t:template>
+                </t:Column>
+
+                <t:Column tooltip="Plant" width="4rem">
+                    <Label text="Plant" />
+                    <t:template>
+                        <Input value="{FragModel>plant}" maxLength="4" />
+                    </t:template>
+                </t:Column>
+
+                <t:Column tooltip="Storage Location" width="6rem">
+                    <Label text="Storage Location" />
+                    <t:template>
+                        <Input value="{FragModel>sloc}" maxLength="15" />
+                    </t:template>
+                </t:Column>
+
+                <t:Column tooltip="GRN doc. No" width="6rem">
+                    <Label text="GRN doc. No" />
+                    <t:template>
+                        <Input value="{FragModel>grndocno}" maxLength="10" />
+                    </t:template>
+                </t:Column>
+
+                
+                <t:Column tooltip="GRN doc. date of UNBW" width="11rem">
+                    <Label text="GRN doc. date of UNBW" />
+                    <t:template> 
+                        <DatePicker value="{path: 'FragModel>grndocdate',type: 'sap.ui.model.type.Date',formatOptions: {pattern: 'dd-MM-yyyy'}}" 
+                                    displayFormat="yyyy-MM-dd"   />
+                    </t:template>
+                </t:Column>
+
+                <t:Column tooltip="Qty Received" width="10rem">
+                    <Label text="Qty Received" />
+                    <t:template>
+                        <Input value="{=${FragModel>qtyrecd}?${FragModel>qtyrecd}:'0.000'}" />
+                    </t:template>
+                </t:Column>
+
+                <t:Column tooltip="Unit" width="7rem">
+                    <Label text="Unit" />
+                    <t:template>
+                        <Input value="{FragModel>unit_field}" showValueHelp="true" valueHelpRequest="onUnitHelpRequestPress"  />
+                    </t:template>
+                </t:Column>
+
+                <t:Column tooltip="Under Warranty" width="7rem">
+                    <Label text="Under Warranty" />
+                    <t:template>
+                        <Select selectedKey="{FragModel>underwarranty}" >
+                            <core:Item key="Y" text="Yes" />
+                            <core:Item key="N" text="No" />
+                        </Select>
+                    </t:template>
+                </t:Column>
+
+                <t:Column tooltip="NRGP Number" width="7rem">
+                    <Label text="NRGP Number" />
+                    <t:template>
+                        <Input value="{FragModel>nrgpno}" maxLength="10" />
+                    </t:template>
+                </t:Column>
+
+                <t:Column tooltip="NRGP date" width="9rem">
+                    <Label text="NRGP date" />
+                    <t:template> 
+                        <DatePicker value="{path: 'FragModel>nrgpdate',type: 'sap.ui.model.type.Date',formatOptions: {pattern: 'dd-MM-yyyy'}}" 
+                                    displayFormat="yyyy-MM-dd" width="9rem"  />
+                    </t:template>
+                </t:Column>
+
+                <t:Column tooltip="E-way bill no" width="7rem">
+                    <Label text="E-way bill no" />
+                    <t:template>
+                        <Input value="{FragModel>ewaybillno}" maxLength="15" />
+                    </t:template>
+                </t:Column>
+
+                <t:Column tooltip="IE status" width="9rem">
+                    <Label text="IE status" />
+                    <t:template>
+                        <!-- <Input value="{FragModel>iestatus}" /> -->
+                        <Select selectedKey="{FragModel>iestatus}" >
+                            <core:Item key="Open" text="Open" />
+                            <core:Item key="InProgress" text="In Progress" />
+                            <core:Item key="Completed" text="Completed" />
+
+                        </Select>
+                    </t:template>
+                </t:Column>
+
+                <t:Column tooltip="Remarks" width="15rem">
+                    <Label text="Remarks" />
+                    <t:template>
+                        <Input value="{FragModel>remarks}" maxLength="50" />
+                    </t:template>
+                </t:Column>
+
+            </t:columns>
+
+            
+        </t:Table>
+
+        <footer>
+            <Toolbar>
+                <ToolbarSpacer/>
+                <Button text="Update" tooltip="Update" type="Success" press="onFragUpdatePress" />    
+                <Button text="Cancel" tooltip="Cancel" type="Reject" press="onCancelPress" />     
+            </Toolbar>
+        </footer>
+
+    </Dialog>
+
+
+</core:FragmentDefinition>

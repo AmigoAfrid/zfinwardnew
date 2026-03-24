@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="Aggregation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CODELIST',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="SAP__CodeList"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="Measures"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.ODM.v1" Alias="SAP__ODM"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="Validation"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="cds_znrdc_sd" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="ZNRDC_DDType" sap:label="NRDC Inward Data Defination" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="gateentryno"/>
+                </Key>
+                <Property Name="gateentryno" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="Grndocno" Type="Edm.String" MaxLength="15"/>
+                <Property Name="gateentrydate" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+                <Property Name="rdcno" Type="Edm.String" MaxLength="20"/>
+                <Property Name="rdcdt" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+                <Property Name="rdcewval" Type="Edm.String" MaxLength="20"/>
+                <Property Name="grndocdate" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+                <Property Name="salesorderno" Type="Edm.String" MaxLength="20"/>
+                <Property Name="nrgpno" Type="Edm.String" MaxLength="8"/>
+                <Property Name="nrgpdate" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+                <Property Name="ewaybillno" Type="Edm.String" MaxLength="10"/>
+                <Property Name="equipmentid" Type="Edm.String" MaxLength="15"/>
+                <Property Name="unbwmatcode" Type="Edm.String" MaxLength="15" sap:text="matdes"/>
+                <Property Name="matdes" Type="Edm.String" MaxLength="50"/>
+                <Property Name="snequip" Type="Edm.String" MaxLength="15"/>
+                <Property Name="custcode" Type="Edm.String" MaxLength="15" sap:display-format="NonNegative"/>
+                <Property Name="unit_field" Type="Edm.String" MaxLength="3" sap:semantics="unit-of-measure"/>
+                <Property Name="qtyrecd" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="unit_field"/>
+                <Property Name="cuky_field" Type="Edm.String" MaxLength="5" sap:semantics="currency-code"/>
+                <Property Name="rdcewbvalue" Type="Edm.Decimal" Precision="10" Scale="3" sap:unit="cuky_field" sap:variable-scale="true"/>
+                <Property Name="underwarranty" Type="Edm.String" MaxLength="1"/>
+                <Property Name="pleqcode" Type="Edm.String" MaxLength="15"/>
+                <Property Name="sloc" Type="Edm.String" MaxLength="15"/>
+                <Property Name="iestatus" Type="Edm.String" MaxLength="15"/>
+                <Property Name="remarks" Type="Edm.String" MaxLength="500"/>
+                <Property Name="tax" Type="Edm.String" MaxLength="15"/>
+                <Property Name="cgst" Type="Edm.String" MaxLength="5"/>
+                <Property Name="sgst" Type="Edm.String" MaxLength="5"/>
+                <Property Name="igst" Type="Edm.String" MaxLength="5"/>
+            </EntityType>
+            <EntityType Name="Z_I_CurrencyType" sap:label="Currency" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Currency"/>
+                </Key>
+                <Property Name="Currency" Type="Edm.String" Nullable="false" MaxLength="5" sap:display-format="UpperCase" sap:label="Currency" sap:quickinfo="Currency Key" sap:semantics="currency-code"/>
+                <Property Name="CurrencyISOCode" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="ISO Code" sap:quickinfo="ISO Currency Code"/>
+                <Property Name="CurrencyDescription" Type="Edm.String" MaxLength="40" sap:label="Description"/>
+            </EntityType>
+            <EntityType Name="Z_I_CustomerType" sap:label="Customer (Business Partner)" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CUSTCODE"/>
+                </Key>
+                <Property Name="CUSTCODE" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Customer" sap:quickinfo="Customer Number"/>
+            </EntityType>
+            <EntityType Name="Z_I_CUSTOMERTXTType" sap:label="CDS I_CUSTOMER" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CUSTCODE"/>
+                    <PropertyRef Name="ADDRESID"/>
+                    <PropertyRef Name="PERSONALID"/>
+                    <PropertyRef Name="CODE"/>
+                </Key>
+                <Property Name="CUSTCODE" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Customer" sap:quickinfo="Customer Number"/>
+                <Property Name="ADDRESID" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Address Number"/>
+                <Property Name="PERSONALID" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Person Number"/>
+                <Property Name="CODE" Type="Edm.String" Nullable="false" MaxLength="1" sap:display-format="UpperCase" sap:label="Address Version" sap:quickinfo="Version ID for International Addresses"/>
+                <Property Name="ADDRESSTYPE" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Address Type" sap:quickinfo="Address type (1=Organization, 2=Person, 3=Contact person)"/>
+                <Property Name="FULLNAME" Type="Edm.String" MaxLength="80" sap:label="Full Name" sap:quickinfo="Full Name of Person"/>
+                <Property Name="ORGANIZATION" Type="Edm.String" MaxLength="40" sap:label="Name" sap:quickinfo="Name 1"/>
+            </EntityType>
+            <EntityType Name="Z_I_EQUIPMENTType" sap:label="CDS I_EQUIPMENT" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="EQUIPMENT"/>
+                </Key>
+                <Property Name="EQUIPMENT" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:label="Equipment" sap:quickinfo="Equipment Number"/>
+                <Property Name="EQUIPMENT_NAME" Type="Edm.String" MaxLength="40" sap:label="Object Description" sap:quickinfo="Description of technical object"/>
+            </EntityType>
+            <EntityType Name="Z_I_NRDC_INWARDType" sap:label="NRDC Inward Interface" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="gateentryno"/>
+                </Key>
+                <Property Name="gateentryno" Type="Edm.String" Nullable="false" MaxLength="20"/>
+                <Property Name="Grndocno" Type="Edm.String" MaxLength="15"/>
+                <Property Name="gateentrydate" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+                <Property Name="rdcno" Type="Edm.String" MaxLength="20"/>
+                <Property Name="rdcdt" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+                <Property Name="rdcewval" Type="Edm.String" MaxLength="20"/>
+                <Property Name="grndocdate" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+                <Property Name="salesorderno" Type="Edm.String" MaxLength="20"/>
+                <Property Name="nrgpno" Type="Edm.String" MaxLength="8"/>
+                <Property Name="nrgpdate" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+                <Property Name="ewaybillno" Type="Edm.String" MaxLength="10"/>
+                <Property Name="equipmentid" Type="Edm.String" MaxLength="15"/>
+                <Property Name="unbwmatcode" Type="Edm.String" MaxLength="15"/>
+                <Property Name="matdes" Type="Edm.String" MaxLength="50"/>
+                <Property Name="snequip" Type="Edm.String" MaxLength="15"/>
+                <Property Name="custcode" Type="Edm.String" MaxLength="15" sap:display-format="NonNegative"/>
+                <Property Name="unit_field" Type="Edm.String" MaxLength="3" sap:semantics="unit-of-measure"/>
+                <Property Name="qtyrecd" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="unit_field"/>
+                <Property Name="cuky_field" Type="Edm.String" MaxLength="5" sap:semantics="currency-code"/>
+                <Property Name="rdcewbvalue" Type="Edm.Decimal" Precision="10" Scale="3" sap:unit="cuky_field" sap:variable-scale="true"/>
+                <Property Name="underwarranty" Type="Edm.String" MaxLength="1"/>
+                <Property Name="pleqcode" Type="Edm.String" MaxLength="15"/>
+                <Property Name="sloc" Type="Edm.String" MaxLength="15"/>
+                <Property Name="iestatus" Type="Edm.String" MaxLength="15"/>
+                <Property Name="remarks" Type="Edm.String" MaxLength="500"/>
+            </EntityType>
+            <EntityType Name="Z_I_PRODUCTType" sap:label="CDS I_PRODUCT" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="PRODUCT"/>
+                </Key>
+                <Property Name="PRODUCT" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:label="Product"/>
+            </EntityType>
+            <EntityType Name="Z_I_ProductTextType" sap:label="Product Description Text" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Product"/>
+                    <PropertyRef Name="Language"/>
+                </Key>
+                <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:label="Product"/>
+                <Property Name="Language" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Language Key"/>
+                <Property Name="ProductDescription" Type="Edm.String" MaxLength="40" sap:label="Product Description"/>
+            </EntityType>
+            <EntityType Name="Z_I_UnitType" sap:label="Unit of measurement" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="UnitOfMeasure"/>
+                </Key>
+                <Property Name="UnitOfMeasure" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Unit of Measure" sap:semantics="unit-of-measure"/>
+            </EntityType>
+            <EntityContainer Name="cds_znrdc_sd_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="ZNRDC_DD" EntityType="cds_znrdc_sd.ZNRDC_DDType" sap:content-version="1"/>
+                <EntitySet Name="Z_I_Currency" EntityType="cds_znrdc_sd.Z_I_CurrencyType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="Z_I_Customer" EntityType="cds_znrdc_sd.Z_I_CustomerType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="Z_I_CUSTOMERTXT" EntityType="cds_znrdc_sd.Z_I_CUSTOMERTXTType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="Z_I_EQUIPMENT" EntityType="cds_znrdc_sd.Z_I_EQUIPMENTType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="Z_I_NRDC_INWARD" EntityType="cds_znrdc_sd.Z_I_NRDC_INWARDType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="Z_I_PRODUCT" EntityType="cds_znrdc_sd.Z_I_PRODUCTType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="Z_I_ProductText" EntityType="cds_znrdc_sd.Z_I_ProductTextType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="Z_I_Unit" EntityType="cds_znrdc_sd.Z_I_UnitType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+            </EntityContainer>
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <Annotations Target="cds_znrdc_sd.cds_znrdc_sd_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+            </Annotations>
+            <Annotations Target="cds_znrdc_sd.cds_znrdc_sd_Entities/Z_I_CUSTOMERTXT" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_znrdc_sd.cds_znrdc_sd_Entities/Z_I_Currency" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_znrdc_sd.cds_znrdc_sd_Entities/Z_I_Customer" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_znrdc_sd.cds_znrdc_sd_Entities/Z_I_EQUIPMENT" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_znrdc_sd.cds_znrdc_sd_Entities/Z_I_NRDC_INWARD" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_znrdc_sd.cds_znrdc_sd_Entities/Z_I_PRODUCT" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_znrdc_sd.cds_znrdc_sd_Entities/Z_I_ProductText" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_znrdc_sd.cds_znrdc_sd_Entities/Z_I_Unit" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_znrdc_sd.cds_znrdc_sd_Entities/ZNRDC_DD" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="true"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_znrdc_sd.cds_znrdc_sd_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Org.OData.Capabilities.V1.BatchSupport">
+                    <Record Type="Org.OData.Capabilities.V1.BatchSupportType">
+                        <PropertyValue Property="ReferencesAcrossChangeSetsSupported" Bool="true"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <atom:link rel="self" href="/sap/opu/odata/sap/ZNRDC_SB/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="/sap/opu/odata/sap/ZNRDC_SB/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

@@ -1,0 +1,21 @@
+<core:FragmentDefinition xmlns="sap.ui.comp.valuehelpdialog" xmlns:m="sap.m" xmlns:fb="sap.ui.comp.filterbar" xmlns:core="sap.ui.core">
+	<ValueHelpDialog supportMultiselect="false"  title="Currency" ok=".onValueHelpOkPress_Currency" cancel=".onValueHelpCancelPress_Currency" afterClose=".onValueHelpAfterClose_Currency" supportRanges="false" key="Currency" descriptionKey="">
+		<filterBar>
+			<fb:FilterBar  advancedMode="true" search=".onFilterBarSearch_Currency" isRunningInValueHelpDialog="true">
+				<fb:filterGroupItems>
+					<fb:FilterGroupItem groupName="__$INTERNAL$" name="Currency" label="Currency" visibleInFilterBar="true">
+						<fb:control>
+								<m:Input name="Currency" showSuggestion="true" showValueHelp="false" suggestionItems="{ path: 'ZNRDC_SB>/Z_I_Currency', sorter: { path: 'Currency' }}">
+								<core:Item key="{ZNRDC_SB>Currency}" text="{ZNRDC_SB>Currency}" />
+								<core:Item key="{ZNRDC_SB>CurrencyDescription}" text="{ZNRDC_SB>CurrencyDescription}" />
+							</m:Input>
+						</fb:control>
+					</fb:FilterGroupItem>
+				
+
+				</fb:filterGroupItems>
+			</fb:FilterBar>
+		</filterBar>
+		
+	</ValueHelpDialog>
+</core:FragmentDefinition> 
