@@ -181,7 +181,7 @@
                     <t:Column tooltip="CGST " width="4rem">
                         <Label text="CGST " />
                         <t:template>
-                            <Select selectedKey="{TabModel>cgst}">
+                            <Select selectedKey="{TabModel>cgst}" change="onCgstChange" >
                                 <core:Item key="0" text="0" />
                                 <core:Item key="9" text="9" />
                             </Select>
