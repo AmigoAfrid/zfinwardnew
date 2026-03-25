@@ -312,7 +312,7 @@
                             <!-- <Input value="{TabModel>iestatus}" /> -->
                             <Select selectedKey="{TabModel>iestatus}" >
                                 <core:Item key="Open" text="Open" />
-                                <core:Item key="In Progress" text="In Progress" />
+                                <core:Item key="InProgress" text="In Progress" />
                                 <core:Item key="Completed" text="Completed" />
 
                             </Select>
@@ -346,7 +346,14 @@
                 enableSelectAll="false"
                 id = "ReportId"
                 visible="{RepModel>/visible}"               
-                fixedColumnCount="3">               
+                fixedColumnCount="4">   
+
+                <t:extension>
+                    <OverflowToolbar >
+                        <ToolbarSpacer />
+                        <Button icon="sap-icon://action" press="onExport" />
+                    </OverflowToolbar>
+                </t:extension>          
                   
 
                 <t:columns>
@@ -372,7 +379,7 @@
                         </t:template>
                     </t:Column>
 
-                    <t:Column tooltip="Customer Code" width="6rem" visible="false"  >
+                    <t:Column tooltip="Customer Code" width="6rem" >
                         <Label text="Customer Code" />
                         <t:template>
                             <Text text="{RepModel>custcode}"   />
@@ -493,21 +500,21 @@
                         </t:template>
                     </t:Column>
 
-                    <t:Column tooltip="Unit" width="7rem">
+                    <t:Column tooltip="Unit" width="7rem" hAlign="Center" >
                         <Label text="Unit" />
                         <t:template>
                             <Text text="{RepModel>unit_field}"   />
                         </t:template>
                     </t:Column>
 
-                    <t:Column tooltip="Under Warranty" width="7rem">
+                    <t:Column tooltip="Under Warranty" width="7rem" hAlign="Center">
                         <Label text="Under Warranty" />
                         <t:template>
                             <Text text="{RepModel>underwarranty}"  />
                         </t:template>
                     </t:Column>
 
-                    <t:Column tooltip="NRGP Number" width="7rem">
+                    <t:Column tooltip="NRGP Number" width="7rem" hAlign="Center">
                         <Label text="NRGP Number" />
                         <t:template>
                             <Text text="{RepModel>nrgpno}"  />
@@ -529,7 +536,7 @@
                         </t:template>
                     </t:Column>
 
-                    <t:Column tooltip="IE status" width="9rem">
+                    <t:Column tooltip="IE status" width="9rem" hAlign="Center">
                         <Label text="IE status" />
                         <t:template>
                             <Text text="{RepModel>iestatus}" />

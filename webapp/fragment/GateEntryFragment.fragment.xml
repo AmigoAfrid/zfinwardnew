@@ -3,7 +3,7 @@
 		<filterBar>
 			<fb:FilterBar  advancedMode="true" search=".onFilterBarSearch_Gate" isRunningInValueHelpDialog="true">
 				<fb:filterGroupItems>
-					<fb:FilterGroupItem groupName="__$INTERNAL$" name="Currency" label="Gate Entry No" visibleInFilterBar="true">
+					<fb:FilterGroupItem groupName="__$INTERNAL$" name="Gate Entry No" label="Gate Entry No" visibleInFilterBar="true">
 						<fb:control>
 								<m:Input name="gateentryno" showSuggestion="true" showValueHelp="false" suggestionItems="{ path: 'ZCDSGATE_ENTRY_SRVB>/ZCDSGATE_ENTRY_HDR', sorter: { path: 'gateentryno' }}">
 								<core1:Item key="{ZCDSGATE_ENTRY_SRVB>gateentryno}" text="{ZCDSGATE_ENTRY_SRVB>gateentryno}" />

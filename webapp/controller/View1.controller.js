@@ -1,8 +1,10 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/m/MessageBox"
+    "sap/m/MessageBox",
+    "sap/ui/export/library",
+    "sap/ui/export/Spreadsheet",
 
-], (Controller, MessageBox) => {
+], (Controller, MessageBox,exportLibrary,Spreadsheet) => {
     "use strict";
 
     return Controller.extend("zfinwardnew.controller.View1", {
@@ -156,7 +158,7 @@ sap.ui.define([
                         nrgpdate: "",
                         ewaybillno: "",
                         remarks: "",
-                        iestatus: ""
+                        iestatus: "Open"
                     };
 
                     aData.push(oRow);
@@ -1680,6 +1682,8 @@ sap.ui.define([
             var oHeaderModel = this.getView().getModel("HeaderModel");
             var oGate = oHeaderModel.getProperty("/HeaderData/gateentryno");
             var oRDC = oHeaderModel.getProperty("/HeaderData/rdcno");
+            var oCustomer = oHeaderModel.getProperty("/HeaderData/custcode");
+
 
 
             let aFilter = [];
@@ -1692,6 +1696,12 @@ sap.ui.define([
             if (oRDC) {
                 aFilter.push(
                     new sap.ui.model.Filter("rdcno", sap.ui.model.FilterOperator.EQ, oRDC)
+                );
+            }
+
+            if (oCustomer) {
+                aFilter.push(
+                    new sap.ui.model.Filter("custcode", sap.ui.model.FilterOperator.EQ, oCustomer)
                 );
             }
 
@@ -1929,7 +1939,6 @@ sap.ui.define([
             sap.ui.core.BusyIndicator.show();
 
 
-
             var oModel = this.getView().getModel("ZCDSGATE_ENTRY_SRVB");
 
             // Check if the model is valid
@@ -1946,7 +1955,7 @@ sap.ui.define([
             // Function to fetch data recursively
             function fetchData(skipCount) {
 
-                oModel.read("/ZCDSGATE_ENTRY_ITM", {
+                oModel.read("/ZCDSGATE_ENTRY_HDR", {
                     //   filters: oFilters,
                     urlParameters: {
                         $top: 5000,  // Request a chunk of 5000 records
@@ -1994,7 +2003,7 @@ sap.ui.define([
 
                     // Set key fields for filtering in the Define Conditions Tab
                     oDialog.setRangeKeyFields([{
-                        label: "gateentryno.",
+                        label: "Gate Entry No.",
                         key: "gateentryno",
                         type: "string",
                         typeInstance: new sap.ui.model.type.String({}, {
@@ -2028,7 +2037,7 @@ sap.ui.define([
 
                             // Define columns for sap.ui.table.Table oColumnDescription
                             oColumnProductCode = new sap.ui.table.Column({
-                                label: new sap.m.Label({ text: "gateentryno" }),
+                                label: new sap.m.Label({ text: "Gate Entry No" }),
                                 template: new sap.m.Text({ wrapping: false, text: "{oJSONModel>gateentryno}" })
                             });
                             oColumnProductCode.data({
@@ -2283,15 +2292,229 @@ sap.ui.define([
         },
 
         // TAX Change:
-        onIGSTSelectChange: function (oEvent) {
-            var oSelect = oEvent.getSource();
-            var oContext = oSelect.getBindingContext("TabModel");
-            var sPath = oContext.getPath();
-            var oModel = oContext.getModel();
+        // onIGSTSelectChange: function (oEvent) {
+        //     var oSelect = oEvent.getSource();
+        //     var oContext = oSelect.getBindingContext("TabModel");
+        //     var sPath = oContext.getPath();
+        //     var oModel = oContext.getModel();
 
-            var cgst = oModel.getProperty(sPath + "/cgst");
+        //     var cgst = oModel.getProperty(sPath + "/cgst");
 
-            console.log(cgst);
+        //     console.log(cgst);
+        // }
+
+        // Export : ----------------------------------------------------------------------
+
+        onExport: function () {
+            var that = this;  
+            sap.m.MessageBox.confirm("Do you want to download the data?", {
+                onClose: function (oAction) {
+                    if (oAction === sap.m.MessageBox.Action.OK) {
+                        var oTable = that.getView().byId("ReportId");
+                        var oBinding = oTable.getBinding("rows");
+                        var aCols = that._createColumns();
+
+                        var oSettings = {
+                       workbook: {
+                                columns: aCols,
+                                hierarchyLevel: "Level"
+                            },
+                            dataSource: oBinding,
+                            fileName: "Inward Data"
+                        };
+
+                        var oSheet = new Spreadsheet(oSettings);
+                        oSheet.build().finally(function () {
+                            oSheet.destroy();
+                        });
+                    }
+                    // Close the Message Box if cancels
+                }
+            });
+
+        },
+
+        _createColumns: function () {
+
+            var EdmType = exportLibrary.EdmType;
+
+            var aCols = [];
+
+            aCols.push({
+                label: "Gate Entry No",
+                property: "gateentryno",
+                type: EdmType.String
+            });
+
+            aCols.push({
+                label: "Line item",
+                property: "line_item",
+                type: EdmType.String
+            });
+
+            aCols.push({
+                label: "RDC No",
+                property: "rdcno",
+                type: EdmType.String
+            });
+
+            
+            aCols.push({
+                label: "Customer Code",
+                property: "custcode",
+                type: EdmType.String
+            });
+
+            aCols.push({
+                label: "Sales Order No",
+                property: "salesorderno",
+                type: EdmType.String
+            });
+
+            
+            aCols.push({
+                label: "UNBW Mat Code",
+                property: "unbwmatcode",
+                type: EdmType.String
+            });
+
+            aCols.push({
+                label: "Material Description",
+                property: "matdes",
+                type: EdmType.String
+            });
+
+            
+            aCols.push({
+                label: "RDC EW Value",
+                property: "rdcewval",
+                type: EdmType.String
+            });
+
+            aCols.push({
+                label: "Currency",
+                property: "currency",
+                type: EdmType.String
+            });
+
+            
+            aCols.push({
+                label: "CGST",
+                property: "cgst",
+                type: EdmType.String
+            });
+
+            aCols.push({
+                label: "SGST",
+                property: "sgst",
+                type: EdmType.String
+            });
+
+            
+            aCols.push({
+                label: "IGST",
+                property: "igst",
+                type: EdmType.String
+            });
+
+
+
+            
+            aCols.push({
+                label: "Equipment ID",
+                property: "equipmentid",
+                type: EdmType.String
+            });
+
+            aCols.push({
+                label: "SN Equip",
+                property: "snequip",
+                type: EdmType.String
+            });
+
+            aCols.push({
+                label: "Pleq Code",
+                property: "pleqcode",
+                type: EdmType.String
+            });
+
+            aCols.push({
+                label: "Plant",
+                property: "plant",
+                type: EdmType.String
+            });
+
+            aCols.push({
+                label: "Storage Location",
+                property: "sloc",
+                type: EdmType.String
+            });
+
+            aCols.push({
+                label: "GRN Doc No",
+                property: "grndocno",
+                type: EdmType.String
+            });
+
+            aCols.push({
+                label: "GRN Doc Date",
+                property: "grndocdate",
+                type: EdmType.String
+            });
+
+            aCols.push({
+                label: "Quantity Received",
+                property: "qtyrecd",
+                type: EdmType.String
+            });
+
+            aCols.push({
+                label: "Unit",
+                property: "unit_field",
+                type: EdmType.String
+            });
+
+            aCols.push({
+                label: "Under Warranty",
+                property: "underwarranty",
+                type: EdmType.String
+            });
+
+             aCols.push({
+                label: "NRGP No",
+                property: "nrgpno",
+                type: EdmType.String
+            });
+
+            aCols.push({
+                label: "NRGP Date",
+                property: "nrgpdate",
+                type: EdmType.String
+            });
+
+            aCols.push({
+                label: "E-Way Bill No",
+                property: "ewaybillno",
+                type: EdmType.String
+            });
+
+             aCols.push({
+                label: "IE Status",
+                property: "iestatus",
+                type: EdmType.String
+            });
+
+            aCols.push({
+                label: "Remarks",
+                property: "remarks",
+                type: EdmType.String
+            });           
+
+            return aCols;
+        },
+        // To Restrict Typing:
+        onLiveChangeBlock:function(oEvent){
+            oEvent.getSource().setValue("");
         }
 
 

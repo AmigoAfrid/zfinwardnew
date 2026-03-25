@@ -3,7 +3,7 @@
             contentWidth="100%"  title="Update Gate Entry info">
 
 
-        <Input width="10rem" showValueHelp="true" valueHelpRequest="onGateValueHelpPress" class="sapUiTinyMargin"
+        <Input width="10rem" showValueHelp="true" liveChange="onLiveChangeBlock" valueHelpRequest="onGateValueHelpPress" class="sapUiTinyMargin"
            id="gateEntryNoId" />
 
         <t:Table  rows="{FragModel>/FragData}"
