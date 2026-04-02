@@ -1,10 +1,11 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/m/MessageBox",
+    "sap/m/MessageToast",
     "sap/ui/export/library",
     "sap/ui/export/Spreadsheet",
 
-], (Controller, MessageBox,exportLibrary,Spreadsheet) => {
+], (Controller, MessageBox,MessageToast, exportLibrary, Spreadsheet) => {
     "use strict";
 
     return Controller.extend("zfinwardnew.controller.View1", {
@@ -71,10 +72,17 @@ sap.ui.define([
             var oHeaderModel = oView.getModel("HeaderModel");
             var oHeaderData = oHeaderModel.getProperty("/HeaderData");
             var oGateEntryValue = oHeaderData.gateentryno;
+                oGateEntryValue = oGateEntryValue.toString().padStart(10, '0');
             var oGateEntryDt = oHeaderData.gateentrydate;
             var oRdc = oHeaderData.rdcno;
             var oRdcDt = oHeaderData.rdcdt;
             var oCustCode = oHeaderData.custcode;
+
+            // if(oGateEntryValue.length !== 10){
+            //     sap.m.MessageBox.information("Gate entry No is mandetory of length 10");
+            //     sap.ui.core.BusyIndicator.hide();
+            //     return;
+            // }
 
             if (!oGateEntryValue || !oGateEntryDt || !oRdc || !oRdcDt || !oCustCode) {
                 sap.m.MessageBox.information("Please enter all Header data");
@@ -141,9 +149,9 @@ sap.ui.define([
                         matdes: "",
                         currency: "",
                         rdcewval: "",
-                        cgst: "",
-                        sgst: "",
-                        igst: "",
+                        cgst: "0",
+                        sgst: "0",
+                        igst: "0",
                         equipmentid: "",
                         snequip: "",
                         pleqcode: "",
@@ -359,7 +367,7 @@ sap.ui.define([
                 error: function () {
                     // Header does not exist → create header first
                     var oHeaderPayload = {
-                        gateentryno: oHeader.gateentryno,
+                        gateentryno: oHeader.gateentryno.toString().padStart(10,0),
                         gateentrydate: that.formatDate(oHeader.gateentrydate),
                         rdcno: oHeader.rdcno,
                         rdcdt: that.formatDate(oHeader.rdcdt),
@@ -2291,22 +2299,10 @@ sap.ui.define([
 
         },
 
-        // TAX Change:
-        // onIGSTSelectChange: function (oEvent) {
-        //     var oSelect = oEvent.getSource();
-        //     var oContext = oSelect.getBindingContext("TabModel");
-        //     var sPath = oContext.getPath();
-        //     var oModel = oContext.getModel();
-
-        //     var cgst = oModel.getProperty(sPath + "/cgst");
-
-        //     console.log(cgst);
-        // }
-
         // Export : ----------------------------------------------------------------------
 
         onExport: function () {
-            var that = this;  
+            var that = this;
             sap.m.MessageBox.confirm("Do you want to download the data?", {
                 onClose: function (oAction) {
                     if (oAction === sap.m.MessageBox.Action.OK) {
@@ -2315,7 +2311,7 @@ sap.ui.define([
                         var aCols = that._createColumns();
 
                         var oSettings = {
-                       workbook: {
+                            workbook: {
                                 columns: aCols,
                                 hierarchyLevel: "Level"
                             },
@@ -2358,7 +2354,7 @@ sap.ui.define([
                 type: EdmType.String
             });
 
-            
+
             aCols.push({
                 label: "Customer Code",
                 property: "custcode",
@@ -2371,7 +2367,7 @@ sap.ui.define([
                 type: EdmType.String
             });
 
-            
+
             aCols.push({
                 label: "UNBW Mat Code",
                 property: "unbwmatcode",
@@ -2384,7 +2380,7 @@ sap.ui.define([
                 type: EdmType.String
             });
 
-            
+
             aCols.push({
                 label: "RDC EW Value",
                 property: "rdcewval",
@@ -2397,7 +2393,7 @@ sap.ui.define([
                 type: EdmType.String
             });
 
-            
+
             aCols.push({
                 label: "CGST",
                 property: "cgst",
@@ -2410,7 +2406,7 @@ sap.ui.define([
                 type: EdmType.String
             });
 
-            
+
             aCols.push({
                 label: "IGST",
                 property: "igst",
@@ -2419,7 +2415,7 @@ sap.ui.define([
 
 
 
-            
+
             aCols.push({
                 label: "Equipment ID",
                 property: "equipmentid",
@@ -2480,7 +2476,7 @@ sap.ui.define([
                 type: EdmType.String
             });
 
-             aCols.push({
+            aCols.push({
                 label: "NRGP No",
                 property: "nrgpno",
                 type: EdmType.String
@@ -2498,7 +2494,7 @@ sap.ui.define([
                 type: EdmType.String
             });
 
-             aCols.push({
+            aCols.push({
                 label: "IE Status",
                 property: "iestatus",
                 type: EdmType.String
@@ -2508,13 +2504,73 @@ sap.ui.define([
                 label: "Remarks",
                 property: "remarks",
                 type: EdmType.String
-            });           
+            });
 
             return aCols;
         },
         // To Restrict Typing:
-        onLiveChangeBlock:function(oEvent){
+        onLiveChangeBlock: function (oEvent) {
             oEvent.getSource().setValue("");
+        },
+        // ====================================================================
+        // Tax Change: ========================================================
+        // ====================================================================
+
+        onCgstChange: function (oEvent) {
+            var oCgst = oEvent.getParameter("selectedItem").getKey();
+            var oContext = oEvent.getSource().getBindingContext("TabModel");
+            console.log("cgst",oCgst);
+
+            var oSgst = oContext.getModel().getProperty(oContext.getPath() + "/sgst");
+            console.log("sgst", oSgst);
+            var oIgst = oContext.getModel().getProperty(oContext.getPath() + "/igst");
+            console.log("igst", oIgst);
+
+            if ( oIgst === "18" ) 
+            {
+                sap.m.MessageToast.show("Invalid tax combination selected");
+                oContext.getModel().setProperty(oContext.getPath() + "/cgst", 0 );
+
+            }
+
+        },
+
+        onSgstChange: function (oEvent) {
+            var oSgst = oEvent.getParameter("selectedItem").getKey();
+            var oContext = oEvent.getSource().getBindingContext("TabModel");
+            console.log("sgst",oSgst);
+
+            var oCgst = oContext.getModel().getProperty(oContext.getPath() + "/cgst");
+            console.log("cgst", oCgst);
+            var oIgst = oContext.getModel().getProperty(oContext.getPath() + "/igst");
+            console.log("igst", oIgst);
+
+             if ( oIgst === "18" ) 
+            {
+                sap.m.MessageToast.show("Invalid tax combination selected");
+                oContext.getModel().setProperty(oContext.getPath() + "/sgst", 0 );
+
+            }
+        },
+
+        onIgstChange: function (oEvent) {
+
+            var oIgst = oEvent.getParameter("selectedItem").getKey();
+            var oContext = oEvent.getSource().getBindingContext("TabModel");
+            console.log("igst",oIgst);
+
+
+            var oCgst = oContext.getModel().getProperty(oContext.getPath() + "/cgst");
+            console.log("cgst", oCgst);
+            var oSgst = oContext.getModel().getProperty(oContext.getPath() + "/sgst");
+            console.log("sgst", oSgst);
+
+             if ( (oCgst === "9" || oSgst === "9"  )  ) 
+            {
+                sap.m.MessageToast.show("Invalid tax combination selected");
+                oContext.getModel().setProperty(oContext.getPath() + "/igst", 0 );
+
+            }
         }
 
 

@@ -167,7 +167,7 @@
                     <t:Column tooltip="rdcewval" width="8rem">
                         <Label text="RDC EW Val" />
                         <t:template>
-                            <Input value="{TabModel>rdcewval}" />
+                            <Input value="{TabModel>rdcewval}" type="Number" />
                         </t:template>
                     </t:Column>
 
@@ -178,7 +178,7 @@
                         </t:template>
                     </t:Column>
 
-                    <t:Column tooltip="CGST " width="4rem">
+                    <t:Column tooltip="CGST " width="4rem" >
                         <Label text="CGST " />
                         <t:template>
                             <Select selectedKey="{TabModel>cgst}" change="onCgstChange" >
@@ -191,7 +191,7 @@
                     <t:Column tooltip="SGST " width="4rem">
                         <Label text="SGST" />
                         <t:template>
-                            <Select selectedKey="{TabModel>sgst}">
+                            <Select selectedKey="{TabModel>sgst}" change="onSgstChange" >
                                     <core:Item key="0" text="0" />
                                     <core:Item key="9" text="9" />
                             </Select>                            
@@ -201,7 +201,7 @@
                     <t:Column tooltip="IGST " width="4rem">
                         <Label text="IGST " />
                         <t:template>
-                            <Select selectedKey="{TabModel>igst}" change="onIGSTSelectChange" >
+                            <Select selectedKey="{TabModel>igst}" change="onIgstChange"  >
                                     <core:Item key="0" text="0" />
                                     <core:Item key="18" text="18" />
                             </Select>  

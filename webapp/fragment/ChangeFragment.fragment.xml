@@ -67,7 +67,7 @@
                 <t:Column tooltip="rdcewval" width="8rem">
                     <Label text="RDC EW Val" />
                     <t:template>
-                        <Input value="{FragModel>rdcewval}" />
+                        <Input value="{FragModel>rdcewval}"  type="Number"  />
                     </t:template>
                 </t:Column>
 
