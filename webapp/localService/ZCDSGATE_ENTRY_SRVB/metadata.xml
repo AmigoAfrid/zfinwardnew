@@ -78,6 +78,8 @@
                 <Property Name="ewaybillno" Type="Edm.String" MaxLength="15"/>
                 <Property Name="remarks" Type="Edm.String" MaxLength="50"/>
                 <Property Name="iestatus" Type="Edm.String" MaxLength="20"/>
+                <Property Name="gateentrydate" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+                <Property Name="rdcdt" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
             </EntityType>
             <EntityContainer Name="cds_zsrvd_cdsgate_entry_hdr_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx">
                 <EntitySet Name="ZCDSGATE_ENTRY_HDR" EntityType="cds_zsrvd_cdsgate_entry_hdr.ZCDSGATE_ENTRY_HDRType" sap:content-version="1"/>
@@ -117,6 +119,9 @@
             <Annotations Target="cds_zsrvd_cdsgate_entry_hdr.ZCDSGATE_ENTRY_ITMType/ewaybillno" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__core.ComputedDefaultValue"/>
             </Annotations>
+            <Annotations Target="cds_zsrvd_cdsgate_entry_hdr.ZCDSGATE_ENTRY_ITMType/gateentrydate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.ComputedDefaultValue"/>
+            </Annotations>
             <Annotations Target="cds_zsrvd_cdsgate_entry_hdr.ZCDSGATE_ENTRY_ITMType/gateentryno" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__core.ComputedDefaultValue"/>
             </Annotations>
@@ -154,6 +159,9 @@
                 <Annotation Term="SAP__core.ComputedDefaultValue"/>
             </Annotations>
             <Annotations Target="cds_zsrvd_cdsgate_entry_hdr.ZCDSGATE_ENTRY_ITMType/qtyrecd" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.ComputedDefaultValue"/>
+            </Annotations>
+            <Annotations Target="cds_zsrvd_cdsgate_entry_hdr.ZCDSGATE_ENTRY_ITMType/rdcdt" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__core.ComputedDefaultValue"/>
             </Annotations>
             <Annotations Target="cds_zsrvd_cdsgate_entry_hdr.ZCDSGATE_ENTRY_ITMType/rdcewval" xmlns="http://docs.oasis-open.org/odata/ns/edm">

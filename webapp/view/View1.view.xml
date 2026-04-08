@@ -74,7 +74,7 @@
 
                                     <layout:VerticalLayout visible="true" class="sapUiTinyMargin" >
                                         <Label />
-                                        <Switch width="10rem" customTextOff="Transaction" customTextOn="Report" change="onSwitchPress"  />                                        
+                                        <Switch id="SwitchId"  customTextOff="Transaction" customTextOn="Report" change="onSwitchPress"  />                                        
                                     </layout:VerticalLayout>
 
                                    
@@ -129,6 +129,13 @@
                         </t:template>
                     </t:Column>
 
+                    <t:Column tooltip="Gate Entry Date" width="9rem" visible="false" >
+                        <Label text="Gate Entry Date" />
+                        <t:template>
+                            <DatePicker value="{TabModel>gateentrydate}" editable="false" displayFormat="dd-MM-yyyy" valueFormat="dd-MM-yyyy" />
+                        </t:template>
+                    </t:Column> 
+
                     <t:Column tooltip="RDC No" width="9rem">
                         <Label text="RDC No" />
                         <t:template>
@@ -136,10 +143,18 @@
                         </t:template>
                     </t:Column> 
 
-                    <t:Column tooltip="Customer Code" width="8rem" visible="false"  >
+                    <t:Column tooltip="RDC Date" width="9rem" visible="false" >
+                        <Label text="RDC Date" />
+                        <t:template>
+                            <DatePicker value="{TabModel>rdcdt}" editable="false" displayFormat="dd-MM-yyyy" valueFormat="dd-MM-yyyy" />
+                        </t:template>
+                    </t:Column> 
+
+
+                    <t:Column tooltip="Customer Code" width="8rem" >
                         <Label text="Customer Code" />
                         <t:template>
-                            <Input value="{TabModel>custcode}"   />
+                            <Input value="{TabModel>custcode}" editable="false" />
                         </t:template>
                     </t:Column>
 
@@ -346,7 +361,7 @@
                 enableSelectAll="false"
                 id = "ReportId"
                 visible="{RepModel>/visible}"               
-                fixedColumnCount="4">   
+                fixedColumnCount="6">   
 
                 <t:extension>
                     <OverflowToolbar >
@@ -372,10 +387,26 @@
                         </t:template>
                     </t:Column>
 
-                     <t:Column tooltip="RDC No" width="6rem" hAlign="Center" >
+                    <t:Column tooltip="Gate Entry Date" width="8rem" hAlign="Center" >
+                        <Label text="Gate Entry Date" />
+                        <t:template>
+                            <DatePicker value="{path: 'RepModel>gateentrydate',type: 'sap.ui.model.type.Date',formatOptions: {pattern: 'dd-MM-yyyy'}}" 
+                                    displayFormat="yyyy-MM-dd" editable="false"  />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="RDC No" width="6rem" hAlign="Center" >
                         <Label text="RDC No" />
                         <t:template>
                             <Text text="{RepModel>rdcno}"   />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="RDC Date" width="8rem" hAlign="Center" >
+                        <Label text="RDC Date" />
+                        <t:template>
+                            <DatePicker value="{path: 'RepModel>rdcdt',type: 'sap.ui.model.type.Date',formatOptions: {pattern: 'dd-MM-yyyy'}}" 
+                                    displayFormat="yyyy-MM-dd" editable="false"   />
                         </t:template>
                     </t:Column>
 

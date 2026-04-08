@@ -33,12 +33,12 @@ server:
           - url: https://my413500.s4hana.cloud.sap
             destination: my413500_Cust
             path: /sap
-          - url: https://my413500.s4hana.cloud.sap
+          - path: /sap/opu/odata/sap/ZNRDC_SB/
+            url: https://my413500.s4hana.cloud.sap
             destination: my413500_Cust
-            path: /sap/opu/odata/sap/ZNRDC_SB/
-          - url: https://my413500.s4hana.cloud.sap
+          - path: /sap/opu/odata/sap/ZCDSGATE_ENTRY_SRVB/
+            url: https://my413500.s4hana.cloud.sap
             destination: my413500_Cust
-            path: /sap/opu/odata/sap/ZCDSGATE_ENTRY_SRVB/
     - name: sap-fe-mockserver
       beforeMiddleware: csp
       configuration:

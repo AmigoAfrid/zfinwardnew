@@ -5,7 +5,7 @@ sap.ui.define([
     "sap/ui/export/library",
     "sap/ui/export/Spreadsheet",
 
-], (Controller, MessageBox,MessageToast, exportLibrary, Spreadsheet) => {
+], (Controller, MessageBox, MessageToast, exportLibrary, Spreadsheet) => {
     "use strict";
 
     return Controller.extend("zfinwardnew.controller.View1", {
@@ -72,7 +72,12 @@ sap.ui.define([
             var oHeaderModel = oView.getModel("HeaderModel");
             var oHeaderData = oHeaderModel.getProperty("/HeaderData");
             var oGateEntryValue = oHeaderData.gateentryno;
-                oGateEntryValue = oGateEntryValue.toString().padStart(10, '0');
+            if (!oGateEntryValue) {
+                sap.ui.core.BusyIndicator.hide();
+                sap.m.MessageBox.error("Gate Entry Number is required");
+                return;
+            }
+            oGateEntryValue = oGateEntryValue.toString().padStart(10, '0');
             var oGateEntryDt = oHeaderData.gateentrydate;
             var oRdc = oHeaderData.rdcno;
             var oRdcDt = oHeaderData.rdcdt;
@@ -142,8 +147,10 @@ sap.ui.define([
                     var oRow = {
                         gateentryno: oGateEntryValue,
                         line_item: nextLineItem,
+                        gateentrydate: oGateEntryDt,
                         rdcno: oRdc,
-                        custcode: "",
+                        rdcdt: oRdcDt,
+                        custcode: oCustCode,
                         salesorderno: "",
                         unbwmatcode: "",
                         matdes: "",
@@ -367,7 +374,7 @@ sap.ui.define([
                 error: function () {
                     // Header does not exist → create header first
                     var oHeaderPayload = {
-                        gateentryno: oHeader.gateentryno.toString().padStart(10,0),
+                        gateentryno: oHeader.gateentryno.toString().padStart(10, 0),
                         gateentrydate: that.formatDate(oHeader.gateentrydate),
                         rdcno: oHeader.rdcno,
                         rdcdt: that.formatDate(oHeader.rdcdt),
@@ -400,8 +407,10 @@ sap.ui.define([
                         gateentryno: oRow.gateentryno,
                         line_item: oRow.line_item.toString().padStart(3, "0"),
                         gateno_item: oRow.gateentryno + "_" + oRow.line_item.toString().padStart(3, "0"),
-                        // custcode: oRow.custcode,
+                        gateentrydate: that.formatDate(oRow.gateentrydate),
                         rdcno: oRow.rdcno,
+                        rdcdt: that.formatDate(oRow.rdcdt),
+                        custcode: oRow.custcode,
                         salesorderno: oRow.salesorderno,
                         unbwmatcode: oRow.unbwmatcode,
                         matdes: oRow.matdes,
@@ -1673,26 +1682,15 @@ sap.ui.define([
             // // --- Date parsing ---
             // var oDateRange = this.getView().byId("DatesId");
             // var sDateRangeValue = oDateRange.getValue();
-            // let bHasDate = sDateRangeValue && sDateRangeValue.trim() !== "";
-            // let FromDate = "", ToDate = "";
-            // if (bHasDate) {
-            //     let [startDateStr, endDateStr] = sDateRangeValue.split(" - ");
-            //     let startDate = new Date(startDateStr);
-            //     let endDate = new Date(endDateStr);
 
-            //     FromDate = new Date(startDate.getTime() - (startDate.getTimezoneOffset() * 60000))
-            //         .toISOString().split("T")[0];
-            //     ToDate = new Date(endDate.getTime() - (endDate.getTimezoneOffset() * 60000))
-            //         .toISOString().split("T")[0];
-            // }
 
 
             var oHeaderModel = this.getView().getModel("HeaderModel");
             var oGate = oHeaderModel.getProperty("/HeaderData/gateentryno");
+            var oGateDt = oHeaderModel.getProperty("/HeaderData/gateentrydate");
             var oRDC = oHeaderModel.getProperty("/HeaderData/rdcno");
+            var oRDCdt = oHeaderModel.getProperty("/HeaderData/rdcdt");
             var oCustomer = oHeaderModel.getProperty("/HeaderData/custcode");
-
-
 
             let aFilter = [];
             if (oGate) {
@@ -1701,9 +1699,21 @@ sap.ui.define([
                 );
             }
 
+            if (oGateDt) {
+                aFilter.push(
+                    new sap.ui.model.Filter("gateentrydate", sap.ui.model.FilterOperator.EQ, oGateDt)
+                );
+            }
+
             if (oRDC) {
                 aFilter.push(
                     new sap.ui.model.Filter("rdcno", sap.ui.model.FilterOperator.EQ, oRDC)
+                );
+            }
+
+            if (oRDCdt) {
+                aFilter.push(
+                    new sap.ui.model.Filter("rdcdt", sap.ui.model.FilterOperator.EQ, oRDCdt)
                 );
             }
 
@@ -1879,6 +1889,14 @@ sap.ui.define([
         },
 
         onRdcDateChange: function (oEvent) {
+
+            var oSwitch = this.byId("SwitchId");
+            var bState = oSwitch.getState();
+
+            if (bState) {
+                return;
+            }
+
 
             var oModel = this.getView().getModel("HeaderModel");
 
@@ -2349,8 +2367,20 @@ sap.ui.define([
             });
 
             aCols.push({
+                label: "Gate Entry Date",
+                property: "gateentrydate",
+                type: EdmType.String
+            });
+
+            aCols.push({
                 label: "RDC No",
                 property: "rdcno",
+                type: EdmType.String
+            });
+
+            aCols.push({
+                label: "RDC Date",
+                property: "rdcdt",
                 type: EdmType.String
             });
 
@@ -2519,17 +2549,16 @@ sap.ui.define([
         onCgstChange: function (oEvent) {
             var oCgst = oEvent.getParameter("selectedItem").getKey();
             var oContext = oEvent.getSource().getBindingContext("TabModel");
-            console.log("cgst",oCgst);
+            console.log("cgst", oCgst);
 
             var oSgst = oContext.getModel().getProperty(oContext.getPath() + "/sgst");
             console.log("sgst", oSgst);
             var oIgst = oContext.getModel().getProperty(oContext.getPath() + "/igst");
             console.log("igst", oIgst);
 
-            if ( oIgst === "18" ) 
-            {
+            if (oIgst === "18") {
                 sap.m.MessageToast.show("Invalid tax combination selected");
-                oContext.getModel().setProperty(oContext.getPath() + "/cgst", 0 );
+                oContext.getModel().setProperty(oContext.getPath() + "/cgst", 0);
 
             }
 
@@ -2538,17 +2567,16 @@ sap.ui.define([
         onSgstChange: function (oEvent) {
             var oSgst = oEvent.getParameter("selectedItem").getKey();
             var oContext = oEvent.getSource().getBindingContext("TabModel");
-            console.log("sgst",oSgst);
+            console.log("sgst", oSgst);
 
             var oCgst = oContext.getModel().getProperty(oContext.getPath() + "/cgst");
             console.log("cgst", oCgst);
             var oIgst = oContext.getModel().getProperty(oContext.getPath() + "/igst");
             console.log("igst", oIgst);
 
-             if ( oIgst === "18" ) 
-            {
+            if (oIgst === "18") {
                 sap.m.MessageToast.show("Invalid tax combination selected");
-                oContext.getModel().setProperty(oContext.getPath() + "/sgst", 0 );
+                oContext.getModel().setProperty(oContext.getPath() + "/sgst", 0);
 
             }
         },
@@ -2557,7 +2585,7 @@ sap.ui.define([
 
             var oIgst = oEvent.getParameter("selectedItem").getKey();
             var oContext = oEvent.getSource().getBindingContext("TabModel");
-            console.log("igst",oIgst);
+            console.log("igst", oIgst);
 
 
             var oCgst = oContext.getModel().getProperty(oContext.getPath() + "/cgst");
@@ -2565,10 +2593,9 @@ sap.ui.define([
             var oSgst = oContext.getModel().getProperty(oContext.getPath() + "/sgst");
             console.log("sgst", oSgst);
 
-             if ( (oCgst === "9" || oSgst === "9"  )  ) 
-            {
+            if ((oCgst === "9" || oSgst === "9")) {
                 sap.m.MessageToast.show("Invalid tax combination selected");
-                oContext.getModel().setProperty(oContext.getPath() + "/igst", 0 );
+                oContext.getModel().setProperty(oContext.getPath() + "/igst", 0);
 
             }
         }
