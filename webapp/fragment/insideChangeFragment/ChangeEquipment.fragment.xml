@@ -1,0 +1,21 @@
+<coreA:FragmentDefinition xmlns="sap.ui.comp.valuehelpdialog" xmlns:m="sap.m" xmlns:fb="sap.ui.comp.filterbar" xmlns:coreA="sap.ui.core">
+	<ValueHelpDialog supportMultiselect="false"  title=" EQUIPMENT No." ok=".onValueHelpOkPress_Equipment_Change" cancel=".onValueHelpCancelPress_Equipment_Change" afterClose=".onValueHelpAfterClose_Equipment" supportRanges="false" key="EQUIPMENT" descriptionKey="">
+		<filterBar>
+			<fb:FilterBar  advancedMode="true" search=".onFilterBarSearch_Equipment_Change" isRunningInValueHelpDialog="true">
+				<fb:filterGroupItems>
+					<fb:FilterGroupItem groupName="__$INTERNAL$" name="EQUIPMENT" label=" EQUIPMENT" visibleInFilterBar="true">
+						<fb:control> 
+								<m:Input name="Equipment No." showSuggestion="true" showValueHelp="false" suggestionItems="{ path: 'ZNRDC_SB/Z_I_EQUIPMENT', sorter: { path: 'EQUIPMENT' }}">
+								<coreA:Item key="{ZNRDC_SB>EQUIPMENT}" text="{ZNRDC_SB>EQUIPMENT}" />
+								<coreA:Item key="{ZNRDC_SB>EQUIPMENT_NAME}" text="{ZNRDC_SB>EQUIPMENT_NAME}" />
+							</m:Input>
+						</fb:control>
+					</fb:FilterGroupItem>
+				
+
+				</fb:filterGroupItems>
+			</fb:FilterBar>
+		</filterBar>
+		
+	</ValueHelpDialog>
+</coreA:FragmentDefinition> 

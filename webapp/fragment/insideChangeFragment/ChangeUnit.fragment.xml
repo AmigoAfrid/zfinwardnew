@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns="sap.ui.comp.valuehelpdialog" xmlns:m="sap.m" xmlns:fb="sap.ui.comp.filterbar" xmlns:core="sap.ui.core">
+	<ValueHelpDialog supportMultiselect="false"  title=" Unit Of Measure" ok=".onValueHelpOkPress_Unit_Change" cancel=".onValueHelpCancelPress_Unit_Change" afterClose=".onValueHelpAfterClose_Unit_Change" supportRanges="false" key="UnitOfMeasure" descriptionKey="">
+		<filterBar>
+			<fb:FilterBar  advancedMode="true" search=".onFilterBarSearch_Unit_Change" isRunningInValueHelpDialog="true">
+				<fb:filterGroupItems>
+					<fb:FilterGroupItem groupName="__$INTERNAL$" name="UnitOfMeasure" label=" Unit Of Measure" visibleInFilterBar="true">
+						<fb:control>
+								<m:Input name="Unit Of Measure" showSuggestion="true" showValueHelp="false" suggestionItems="{ path: 'ZNRDC_SB>/Z_I_Unit', sorter: { path: 'UnitOfMeasure' }}">
+								<core:Item key="{ZNRDC_SB>UnitOfMeasure}" text="{ZNRDC_SB>UnitOfMeasure}" />
+							</m:Input>
+						</fb:control>
+					</fb:FilterGroupItem>
+				
+
+				</fb:filterGroupItems>
+			</fb:FilterBar>
+		</filterBar>
+		
+	</ValueHelpDialog>
+</core:FragmentDefinition> 

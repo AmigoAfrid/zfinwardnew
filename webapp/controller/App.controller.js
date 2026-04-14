@@ -1,9 +1,9 @@
 sap.ui.define([
-  "sap/ui/core/mvc/Controller"
-], (BaseController) => {
+  "./ChangeController",
+], (ChangeController) => {
   "use strict";
 
-  return BaseController.extend("zfinwardnew.controller.App", {
+  return ChangeController.extend("zfinwardnew.controller.App", {
       onInit() {
       }
   });
