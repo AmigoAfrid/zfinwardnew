@@ -29,7 +29,7 @@
                     </t:template>
                 </t:Column>
 
-                 <t:Column tooltip="RDC No" width="8rem">
+                 <t:Column tooltip="RDC No" width="12rem">
                     <Label text="RDC No" />
                     <t:template>
                         <Input value="{FragModel>rdcno}" editable="false"  />
@@ -46,21 +46,21 @@
                 <t:Column tooltip="Sales Order No" width="8rem">
                     <Label text="Sales Order No" />
                     <t:template>
-                        <Input value="{FragModel>salesorderno}" maxLength="10"  />
+                        <Input value="{FragModel>salesorderno}" maxLength="10" type="Number"  />
                     </t:template>
                 </t:Column>
 
-                <t:Column tooltip="unbwmat Code" width="8rem">
+                <t:Column tooltip="unbwmat Code" width="9rem">
                     <Label text="UNBW Mat Code" />
                     <t:template>
-                        <Input value="{FragModel>unbwmatcode}" showValueHelp="true" valueHelpRequest="onMaterialValueHelpPress" />
+                        <Input value="{FragModel>unbwmatcode}" showValueHelp="true" valueHelpRequest="onMaterialValueHelpPress_Change" />
                     </t:template>
                 </t:Column>
 
                 <t:Column tooltip="Mat Desription" width="8rem">
                     <Label text="Mat Description" tooltip="Mat Description" />
                     <t:template>
-                        <Input value="{FragModel>matdes}" maxLength="50" />
+                        <Input value="{FragModel>matdes}" maxLength="50" editable="false" />
                     </t:template>
                 </t:Column>
 
@@ -74,14 +74,14 @@
                 <t:Column tooltip="Currency" width="7rem">
                     <Label text="Currency" />
                     <t:template>
-                        <Input value="{FragModel>currency}" showValueHelp="true" valueHelpRequest="onCurrencyValueHelpPress" />
+                        <Input value="{FragModel>currency}" showValueHelp="true" valueHelpRequest="onCurrencyValueHelpPress_Change" />
                     </t:template>
                 </t:Column>
 
                 <t:Column tooltip="CGST " width="4rem">
                     <Label text="CGST " />
                     <t:template>
-                        <Select selectedKey="{FragModel>cgst}">
+                        <Select selectedKey="{FragModel>cgst}" change="onCgstChange_Change" >
                             <core:Item key="0" text="0" />
                             <core:Item key="9" text="9" />
                         </Select>
@@ -91,7 +91,7 @@
                 <t:Column tooltip="SGST " width="4rem">
                     <Label text="SGST" />
                     <t:template>
-                        <Select selectedKey="{FragModel>sgst}">
+                        <Select selectedKey="{FragModel>sgst}" change="onSgstChange_Change">
                                 <core:Item key="0" text="0" />
                                 <core:Item key="9" text="9" />
                         </Select>                            
@@ -101,7 +101,7 @@
                 <t:Column tooltip="IGST " width="4rem">
                     <Label text="IGST " />
                     <t:template>
-                        <Select selectedKey="{FragModel>igst}">
+                        <Select selectedKey="{FragModel>igst}" change="onIgstChange_Change" >
                                 <core:Item key="0" text="0" />
                                 <core:Item key="18" text="18" />
                         </Select>  
@@ -109,21 +109,21 @@
                 </t:Column>
             
 
-                <t:Column tooltip="Equipment Id" width="6rem">
+                <t:Column tooltip="Equipment Id" width="8rem">
                     <Label text="Equipment Id" />
                     <t:template>
-                        <Input value="{FragModel>equipmentid}" maxLength="18" />
+                        <Input value="{FragModel>equipmentid}" maxLength="18" showValueHelp="true" valueHelpRequest="onEquipmentValueHelpPress_Change" />
                     </t:template>
                 </t:Column>
 
                 <t:Column tooltip="SN Equip" width="8rem">
                     <Label text="SN Equip" />
                     <t:template>
-                        <Input value="{FragModel>snequip}" maxLength="18"/>
+                        <Input value="{FragModel>snequip}" maxLength="18"  />
                     </t:template>
                 </t:Column>
 
-                <t:Column tooltip="pleq Code" width="4rem">
+                <t:Column tooltip="pleq Code" width="8rem">
                     <Label text="pleq Code" />
                     <t:template>
                         <Input value="{FragModel>pleqcode}" maxLength="10" />
@@ -137,7 +137,7 @@
                     </t:template>
                 </t:Column>
 
-                <t:Column tooltip="Storage Location" width="6rem">
+                <t:Column tooltip="Storage Location" width="8rem">
                     <Label text="Storage Location" />
                     <t:template>
                         <Input value="{FragModel>sloc}" maxLength="15" />
@@ -172,7 +172,7 @@
                 <t:Column tooltip="Unit" width="7rem">
                     <Label text="Unit" />
                     <t:template>
-                        <Input value="{FragModel>unit_field}" showValueHelp="true" valueHelpRequest="onUnitHelpRequestPress"  />
+                        <Input value="{FragModel>unit_field}" showValueHelp="true" valueHelpRequest="onUnitHelpRequestPress_Change"  />
                     </t:template>
                 </t:Column>
 
@@ -193,7 +193,7 @@
                     </t:template>
                 </t:Column>
 
-                <t:Column tooltip="NRGP date" width="9rem">
+                <t:Column tooltip="NRGP date" width="10rem">
                     <Label text="NRGP date" />
                     <t:template> 
                         <DatePicker value="{path: 'FragModel>nrgpdate',type: 'sap.ui.model.type.Date',formatOptions: {pattern: 'dd-MM-yyyy'}}" 

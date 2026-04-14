@@ -39,9 +39,9 @@
                 <Key>
                     <PropertyRef Name="gateentryno"/>
                 </Key>
-                <Property Name="gateentryno" Type="Edm.String" Nullable="false" MaxLength="10" sap:updatable="false"/>
+                <Property Name="gateentryno" Type="Edm.String" Nullable="false" MaxLength="20" sap:updatable="false"/>
                 <Property Name="gateentrydate" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
-                <Property Name="rdcno" Type="Edm.String" MaxLength="10"/>
+                <Property Name="rdcno" Type="Edm.String" MaxLength="20"/>
                 <Property Name="rdcdt" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
                 <Property Name="custcode" Type="Edm.String" MaxLength="7" sap:display-format="NonNegative"/>
             </EntityType>
@@ -50,14 +50,14 @@
                     <PropertyRef Name="gateentryno"/>
                     <PropertyRef Name="line_item"/>
                 </Key>
-                <Property Name="gateentryno" Type="Edm.String" Nullable="false" MaxLength="10" sap:updatable="false"/>
+                <Property Name="gateentryno" Type="Edm.String" Nullable="false" MaxLength="20" sap:updatable="false"/>
                 <Property Name="line_item" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="NonNegative" sap:updatable="false"/>
                 <Property Name="gateno_item" Type="Edm.String" MaxLength="14"/>
                 <Property Name="custcode" Type="Edm.String" MaxLength="7" sap:display-format="NonNegative"/>
                 <Property Name="salesorderno" Type="Edm.String" MaxLength="10" sap:display-format="NonNegative"/>
                 <Property Name="unbwmatcode" Type="Edm.String" MaxLength="40"/>
                 <Property Name="matdes" Type="Edm.String" MaxLength="50"/>
-                <Property Name="rdcno" Type="Edm.String" MaxLength="10"/>
+                <Property Name="rdcno" Type="Edm.String" MaxLength="20"/>
                 <Property Name="currency" Type="Edm.String" MaxLength="5" sap:semantics="currency-code"/>
                 <Property Name="rdcewval" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="currency" sap:variable-scale="true"/>
                 <Property Name="cgst" Type="Edm.Decimal" Precision="2" Scale="0"/>
