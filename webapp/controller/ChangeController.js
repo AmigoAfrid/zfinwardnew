@@ -3,7 +3,7 @@ sap.ui.define([
     "sap/m/MessageBox",
     "sap/m/MessageToast",    
 
-], (Controller, MessageBox, MessageToast, t) => {
+], (Controller, MessageBox, MessageToast, ) => {
     "use strict";
 
     return Controller.extend("zfinwardnew.controller.ChangeController", {
