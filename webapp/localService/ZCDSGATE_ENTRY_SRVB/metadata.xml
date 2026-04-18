@@ -49,12 +49,14 @@
                 <Key>
                     <PropertyRef Name="gateentryno"/>
                     <PropertyRef Name="line_item"/>
+                    <PropertyRef Name="dateyear"/>
                 </Key>
                 <Property Name="gateentryno" Type="Edm.String" Nullable="false" MaxLength="20" sap:updatable="false"/>
                 <Property Name="line_item" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="NonNegative" sap:updatable="false"/>
+                <Property Name="dateyear" Type="Edm.String" Nullable="false" MaxLength="20"/>
                 <Property Name="gateno_item" Type="Edm.String" MaxLength="14"/>
                 <Property Name="custcode" Type="Edm.String" MaxLength="7" sap:display-format="NonNegative"/>
-                <Property Name="salesorderno" Type="Edm.String" MaxLength="10" sap:display-format="NonNegative"/>
+                <Property Name="salesorderno" Type="Edm.String" MaxLength="20"/>
                 <Property Name="unbwmatcode" Type="Edm.String" MaxLength="40"/>
                 <Property Name="matdes" Type="Edm.String" MaxLength="50"/>
                 <Property Name="rdcno" Type="Edm.String" MaxLength="20"/>
@@ -111,6 +113,9 @@
                 <Annotation Term="SAP__core.ComputedDefaultValue"/>
             </Annotations>
             <Annotations Target="cds_zsrvd_cdsgate_entry_hdr.ZCDSGATE_ENTRY_ITMType/custcode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.ComputedDefaultValue"/>
+            </Annotations>
+            <Annotations Target="cds_zsrvd_cdsgate_entry_hdr.ZCDSGATE_ENTRY_ITMType/dateyear" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                 <Annotation Term="SAP__core.ComputedDefaultValue"/>
             </Annotations>
             <Annotations Target="cds_zsrvd_cdsgate_entry_hdr.ZCDSGATE_ENTRY_ITMType/equipmentid" xmlns="http://docs.oasis-open.org/odata/ns/edm">

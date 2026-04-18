@@ -36,6 +36,14 @@
                     </t:template>
                 </t:Column>
 
+                <t:Column tooltip="Gate Entry Date" width="9rem">
+                    <Label text="Gate Entry Date" />
+                    <t:template>
+                        <DatePicker value="{path: 'FragModel>gateentrydate',type: 'sap.ui.model.type.Date',formatOptions: {pattern: 'dd-MM-yyyy'}}" 
+                                    displayFormat="yyyy-MM-dd" editable="false" />
+                    </t:template>
+                </t:Column> 
+
                 <t:Column tooltip="Customer Code" width="8rem" visible="false"  >
                     <Label text="Customer Code" />
                     <t:template>
@@ -46,7 +54,7 @@
                 <t:Column tooltip="Sales Order No" width="8rem">
                     <Label text="Sales Order No" />
                     <t:template>
-                        <Input value="{FragModel>salesorderno}" maxLength="10" type="Number"  />
+                        <Input value="{FragModel>salesorderno}" maxLength="10" />
                     </t:template>
                 </t:Column>
 

@@ -161,7 +161,7 @@
                     <t:Column tooltip="Sales Order No" width="8rem">
                         <Label text="Sales Order No" />
                         <t:template>
-                            <Input value="{TabModel>salesorderno}" maxLength="10" type="Number"  />
+                            <Input value="{TabModel>salesorderno}" maxLength="10" />
                         </t:template>
                     </t:Column>
 

@@ -83,6 +83,11 @@ sap.ui.define([
             var oRdcDt = oHeaderData.rdcdt;
             var oCustCode = oHeaderData.custcode;
 
+            var oGate = oHeaderData.gateentryno.toString().padStart(10, '0');;
+            var oDate = oHeaderData.gateentrydate.split("-")[0];
+
+            var oUniqueGate = oGate + oDate;
+
             // if(oGateEntryValue.length !== 10){
             //     sap.m.MessageBox.information("Gate entry No is mandetory of length 10");
             //     sap.ui.core.BusyIndicator.hide();
@@ -105,7 +110,7 @@ sap.ui.define([
             // OData Model
             var oDataModel = oView.getModel("ZCDSGATE_ENTRY_SRVB");
 
-            var aFilters = [new sap.ui.model.Filter("gateentryno", sap.ui.model.FilterOperator.EQ, oGateEntryValue)];
+            var aFilters = [new sap.ui.model.Filter("dateyear", sap.ui.model.FilterOperator.EQ, oUniqueGate)];
 
             var that = this;
 
@@ -366,7 +371,7 @@ sap.ui.define([
             var that = this;
 
             // 1. Check if header exists
-            oODataModel.read("/ZCDSGATE_ENTRY_HDR('" + oHeader.gateentryno + "')", {
+            oODataModel.read("/ZCDSGATE_ENTRY_HDR('" + oHeader.gateentryno.toString().padStart(10, 0)+ "')", {
                 success: function () {
                     // Header exists → directly save line items
                     saveLineItems();
@@ -403,10 +408,16 @@ sap.ui.define([
                 aSelectedIndices.forEach(function (iIndex) {
                     var oRow = aData[iIndex];
 
+                    var oGate = oHeader.gateentryno.toString().padStart(10, '0');;
+                    var oDate = oHeader.gateentrydate.split("-")[0];
+
+                    var oUnique = oGate + oDate;
+
                     var oItemPayload = {
                         gateentryno: oRow.gateentryno,
                         line_item: oRow.line_item.toString().padStart(3, "0"),
                         gateno_item: oRow.gateentryno + "_" + oRow.line_item.toString().padStart(3, "0"),
+                        dateyear: oUnique,
                         gateentrydate: that.formatDate(oRow.gateentrydate),
                         rdcno: oRow.rdcno,
                         rdcdt: that.formatDate(oRow.rdcdt),
@@ -1954,7 +1965,7 @@ sap.ui.define([
                 var sPath = oContext.getPath();
                 oTabModel.setProperty(sPath + "/grndocdate", null);
             }
-        },        
+        },
 
         onFragUpdatePress: function () {
 
@@ -1975,18 +1986,25 @@ sap.ui.define([
 
                 var oContext = oTable.getContextByIndex(iIndex);
                 var oData = oContext.getObject();
+
                 var sGateEntry = oData.gateentryno;
+                var oGateEntryDate = oData.gateentrydate.getFullYear();
+                var oYear = sGateEntry+oGateEntryDate;
+
                 var sLineItem = oData.line_item;
                 // Build key path
                 var sPath = oModel.createKey("/ZCDSGATE_ENTRY_ITM", {
                     gateentryno: sGateEntry,
-                    line_item: sLineItem
+                    line_item: sLineItem,
+                    dateyear:oYear,
                 });
 
                 var oPayload = {
                     gateentryno: oData.gateentryno,
                     line_item: oData.line_item.toString().padStart(3, "0"),
                     gateno_item: oData.gateentryno + "_" + oData.line_item.toString().padStart(3, "0"),
+                    dateyear: oYear,
+                    gateentrydate: that.formatDate(oData.gateentrydate),
                     rdcno: oData.rdcno,
                     // custcode: oRow.custcode,
                     salesorderno: oData.salesorderno,
@@ -2311,7 +2329,7 @@ sap.ui.define([
                 oContext.getModel().setProperty(oContext.getPath() + "/igst", 0);
 
             }
-        },        
+        },
 
 
     });
