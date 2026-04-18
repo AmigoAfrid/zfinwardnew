@@ -19,6 +19,6 @@ builder:
           name: ZF_INWARD_NEW_R
           description: Inward Entry Register
           package: ZFIORI
-          transport: JTRK903145
+          transport: JTRK903224
         exclude:
           - /test/
